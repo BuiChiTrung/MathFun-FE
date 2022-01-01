@@ -1,7 +1,7 @@
 <template>
   <div id="question-container">
     <div id="question-block">
-      <img id="condition" :src="question['condition_image_url']" alt="condition">
+      <img id="condition" :src="imgUrl" alt="condition">
       <div v-if="userPickAChoice && correctAnswer" class="alert alert-success" role="alert">
         <img src="https://img.icons8.com/dusk/20/000000/flower.png"/>
         Bạn giỏi quá! Đúng rồi
@@ -38,6 +38,13 @@ export default {
     return {
       'userPickAChoice': false,
       'correctAnswer': false,
+    }
+  },
+
+  computed: {
+    imgUrl() {
+      console.log(`@/assets/thumbnails/${this.question['condition_image_url']}`);
+      return require(`@/assets/thumbnails/${this.question['condition_image_url']}`);
     }
   },
 

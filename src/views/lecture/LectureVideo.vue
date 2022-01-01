@@ -1,6 +1,6 @@
 <template>
     <video id="my-player" class="video-js  vjs-theme-forest">
-      <source src="@/assets/videos/Bai_giang_1_Dat.mp4" type="video/mp4"/>
+      <source :src="videoPath" type="video/mp4"/>
     </video>
 </template>
 
@@ -10,6 +10,13 @@ import $ from 'jquery';
 
 export default {
   name: "LectureVideo",
+
+  data() {
+    return {
+      videoPath: require(`@/assets/videos/lecture_${this.$route.params.id}.mp4`),
+    }
+  },
+
   mounted() {
     const player = videojs('my-player', {
       controls: true,
