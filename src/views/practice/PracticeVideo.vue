@@ -23,6 +23,7 @@ export default {
     this.setUpVideoPlayer();
     getTopicPracticeVideoQuestions(this.$route.params.id)
         .then(({data}) => {
+          console.log(data);
           this.questions = data['questions'];
         })
         .catch(err => console.log(err))
