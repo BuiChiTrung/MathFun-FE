@@ -1,0 +1,30 @@
+$main-color-1: rgba(123, 210, 130, 0.7);
+$main-color-2:  #6a89cc;
+$sidebar-width: 25rem;
+
+@mixin flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-center-1 {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
