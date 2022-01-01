@@ -1,7 +1,7 @@
 <template>
   <div id="video-block">
-    <video id="my-player" class="video-js  vjs-theme-forest">
-      <source src="@/assets/videos/Bai_giang_1_Dat.mp4" type="video/mp4"/>
+    <video  id="my-player" class="video-js  vjs-theme-forest">
+      <source v-if="videoPath" src="@/assets/videos/logic_ngoc_practice.mp4" type="video/mp4"/>
     </video>
     <PracticeQuestion v-if="isQuestionAppearTime" :question="questions[questionId - 1]" @continueVideo="continueVideo"/>
     <PracticeResult v-if="videoEndAndAllQuestionShowed" :totalQuestion="questions.length" :totalCorrectAnswer="totalCorrectAnswer"/>
@@ -14,6 +14,7 @@ import $ from 'jquery';
 import PracticeQuestion from "./PracticeQuestion";
 import PracticeResult from "./PracticeResult";
 import {getTopicPracticeVideoQuestions} from "../../infrastructure/api_services";
+import {baseStorageUrl} from "../../env";
 
 export default {
   name: "PracticeVideo",
@@ -22,8 +23,9 @@ export default {
   created() {
     getTopicPracticeVideoQuestions(this.$route.params.id)
       .then(({data}) => {
-        // console.log(data)
-        this.questions = data.questions;
+        console.log(data)
+        this.videoPath = require(`${baseStorageUrl}/${data['practice_video_path']}`);
+        this.questions = data['questions'];
       })
       .catch(err => console.log(err))
   },
@@ -80,6 +82,7 @@ export default {
   data() {
     return {
       questions: [],
+      videoPath: null,
       // questions: [
       //   {
       //     "id": 1,

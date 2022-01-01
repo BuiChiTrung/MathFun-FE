@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const baseApiUrl = 'http://localhost:8000/api';
+import {baseApiUrl} from "../env";
 
 export function getTopicLectureVideo(topicId) {
     return axios.get(`${baseApiUrl}/lecture/${topicId}`);
