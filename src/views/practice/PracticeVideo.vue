@@ -54,10 +54,10 @@ export default {
 
     checkIfQuestionShouldRaise() {
       const vidCurrentTime = this.video.currentTime;
-      // while (this.questionId < this.questions.length &&
-      //        vidCurrentTime >= 1.5 + this.questions[this.questionId]['end_second']) {
-      //   this.questionId++;
-      // }
+      while (this.questionId < this.questions.length &&
+             vidCurrentTime >= 1.5 + this.questions[this.questionId]['end_second']) {
+        this.questionId++;
+      }
 
       if (this.questionId === this.questions.length) {
         if (vidCurrentTime === this.video.duration)
