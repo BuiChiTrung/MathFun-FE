@@ -67,6 +67,17 @@ export default {
         this.questionId++;
         this.isQuestionAppearTime = true;
         this.video.pause();
+        this.closeFullscreen();
+      }
+    },
+
+    closeFullscreen() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
       }
     },
 
