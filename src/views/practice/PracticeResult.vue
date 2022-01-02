@@ -11,7 +11,7 @@
       </div>
       <div id="buttons">
         <span class="material-icons" title="Xem lại" @click="$router.go()">replay</span>
-        <a :href="nextLecture" class="btn-navigation green">Bài giảng tiếp theo</a>
+        <a v-if="$route.params.id != 5" :href="nextLecture" class="btn-navigation green">Bài giảng tiếp theo</a>
       </div>
 
     </div>
