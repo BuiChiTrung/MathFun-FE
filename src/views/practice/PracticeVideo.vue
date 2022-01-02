@@ -4,7 +4,7 @@
       <source :src="videoPath" type="video/mp4"/>
     </video>
     <PracticeQuestion v-if="isQuestionAppearTime" :question="questions[questionId - 1]" @continueVideo="continueVideo"/>
-    <PracticeResult v-if="videoEndAndAllQuestionShowed" :totalQuestion="questions.length" :totalCorrectAnswer="totalCorrectAnswer"/>
+    <PracticeResult v-if="videoEndAndAllQuestionShowed" :totalQuestion="questions.length" :totalCorrectAnswer="totalCorrectAnswer" @replayVideo="replayVideo"/>
   </div>
 </template>
 
@@ -34,8 +34,12 @@ export default {
       this.player = videojs('my-player', {
         controls: true,
         autoplay: false,
+        allowFullscreen: false,
         preload: 'auto',
-        playbackRates: [0.5, 1, 1.5, 2]
+        playbackRates: [0.5, 1, 1.5, 2],
+        controlBar: {
+          fullscreenToggle: false
+        }
       });
 
       this.player.seekButtons({
@@ -54,10 +58,10 @@ export default {
 
     checkIfQuestionShouldRaise() {
       const vidCurrentTime = this.video.currentTime;
-      while (this.questionId < this.questions.length &&
-             vidCurrentTime >= 1.5 + this.questions[this.questionId]['end_second']) {
-        this.questionId++;
-      }
+      // while (this.questionId < this.questions.length &&
+      //        vidCurrentTime >= 1.5 + this.questions[this.questionId]['end_second']) {
+      //   this.questionId++;
+      // }
 
       if (this.questionId === this.questions.length) {
         if (vidCurrentTime === this.video.duration)
@@ -72,13 +76,14 @@ export default {
     },
 
     closeFullscreen() {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) { /* Safari */
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) { /* IE11 */
-        document.msExitFullscreen();
-      }
+      // if (document.exitFullscreen) {
+      //   document.exitFullscreen();
+      // }
+      // else if (document.webkitExitFullscreen) { /* Safari */
+      //   document.webkitExitFullscreen();
+      // } else if (document.msExitFullscreen) { /* IE11 */
+      //   document.msExitFullscreen();
+      // }
     },
 
     continueVideo(rightAnswer) {
@@ -86,6 +91,13 @@ export default {
       console.log(this.totalCorrectAnswer);
       this.isQuestionAppearTime = false;
       this.video.play();
+    },
+
+    replayVideo() {
+      clearInterval(this.questionInterval);
+      this.video.currentTime = 0;
+      this.video.play();
+      this.videoEndAndAllQuestionShowed = false;
     }
   },
 
@@ -99,13 +111,14 @@ export default {
       questionInterval: null,
       videoEndAndAllQuestionShowed: false,
       video: null,
-      totalCorrectAnswer: 0
+      totalCorrectAnswer: 0,
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
+
 #video-block {
   position: relative;
 }

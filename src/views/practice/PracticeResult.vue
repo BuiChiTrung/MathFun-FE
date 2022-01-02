@@ -10,7 +10,8 @@
         {{ totalCorrectAnswer }} / {{ totalQuestion }}
       </div>
       <div id="buttons">
-        <span class="material-icons" title="Xem lại" @click="$router.go()">replay</span>
+<!--        <span class="material-icons" title="Xem lại" @click="$router.go()">replay</span>-->
+        <span class="material-icons" title="Xem lại" @click="$emit('replayVideo')">replay</span>
         <a v-if="$route.params.id != 5" :href="nextLecture" class="btn-navigation green">Bài giảng tiếp theo</a>
       </div>
 
