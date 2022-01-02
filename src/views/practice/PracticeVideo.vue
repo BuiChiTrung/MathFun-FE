@@ -1,6 +1,6 @@
 <template>
   <div id="video-block">
-    <video  id="my-player" class="video-js  vjs-theme-forest">
+    <video  id="my-player" class="video-js  vjs-theme-forest" playsinline>
       <source :src="videoPath" type="video/mp4"/>
     </video>
     <PracticeQuestion v-if="isQuestionAppearTime" :question="questions[questionId - 1]" @continueVideo="continueVideo"/>
