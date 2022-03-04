@@ -1,4 +1,6 @@
-# mathfun
+# mathfun: http://mathfun.clcuet.tech
+
+
 ## Overview
 This is a simple website that contains lecture and practice videos that we made ourselves about particular topics in math.
 
